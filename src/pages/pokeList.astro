@@ -1,0 +1,39 @@
+---
+import axios from "axios";
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+let pokemons = [];
+for (var i = 1; i <= 12; i += 3) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${i}/`;
+    const response = await fetch(url);
+    const data = await response.json();
+    let object = {
+        nombre: data.forms[0].name,
+        img: data.sprites.other.home.front_default,
+        num: data.id,
+        url: data.forms[0].url   
+    };
+    pokemons.push(object);
+};
+---
+<Layout title="Listado">
+    <main class="m-auto max-w-4xl">
+        <ul class="grid grid-cols-2 md:grid-cols-3 gap-3 px-4">
+        {
+            pokemons.map( ({ img, nombre, url, id }) => {
+                return (
+                <a class="hover:scale-105 inline-block transition-all hover:contrast-125 hover:shadow-2xl" href={`${url}`}>
+                <img
+                    alt={`Imágen de pokemon ${nombre}`}
+                    class="aspect-[150/150] h-full object-cover w-full max-w-full rounded"
+                    src={img}
+                    style={`view-transition-name: book-${id}`}
+                />
+                😄
+                </a>
+                )
+            })
+        }
+        </ul>
+    </main>
+</Layout>

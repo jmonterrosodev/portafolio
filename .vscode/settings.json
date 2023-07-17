@@ -5,5 +5,8 @@
       "astro", // Enable .astro
       "typescript", // Enable .ts
       "typescriptreact" // Enable .tsx
-    ]
+    ],
+    "emojisense.languages": {
+      "*": true
+    }
 }
